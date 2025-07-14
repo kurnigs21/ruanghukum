@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>THE ROOM</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+	  background-color: black
+    }
+
+    .container {
+      text-align: center;
+      font-size: 36px;
+      font-family: Arial, sans-serif;
+    }
+
+	.header {
+      font-size: 36px;
+      font-weight: bold;
+      animation: flicker 1s infinite;
+	  margin-bottom: 50px;
+    }
+
+    @keyframes flicker {
+      0%, 100% {
+        color: purple;
+      }
+      25% {
+        color: blue;
+      }
+      50% {
+        color: red;
+      }
+      75% {
+        color: pink;
+      }
+    }
+
+    .name-picker {
+      display: inline-block;
+      margin: 20px;
+    }
+
+    .name-display {
+      border: 3px solid #333;
+      border-radius: 3px;
+      margin-top: 3px;
+	  background-color: #f0f0f0
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+  <div class="header">PENALTY TURN</div>
+  
+    <div class="name-picker">
+	<img src="https://www.supermanhomepage.com/clickandbuilds/SupermanHomepage/wp-content/uploads/2024/12/yamcha-pose2.jpg" style="width: 550px; height: 309px;">
+      <div class="name-display" id="nameDisplay1">SELECT PENALTY</div>
+      <br>
+      <button onclick="startRandomName(1)">Start Picker</button>
+      <button onclick="stopRandomName(1)">Stop Picker</button>
+    </div>
+    
+  <script>
+    const names = [
+      "INTRO (NO ID)",
+      "MOTIVATE FRIEND",
+	  "SING NATIONAL",
+      "SING POP",
+	  
+    ];
+
+    let intervalIds = {};
+
+    function startRandomName(pickerNum) {
+      const nameDisplay = document.getElementById(`nameDisplay${pickerNum}`);
+      let currentIndex = Math.floor(Math.random() * names.length);
+
+      intervalIds[pickerNum] = setInterval(() => {
+        currentIndex = (currentIndex + 1) % names.length;
+        const currentName = names[currentIndex];
+        nameDisplay.innerText = currentName;
+      }, 30); // Change the value (in milliseconds) to adjust the speed of interchange.
+    }
+
+    function stopRandomName(pickerNum) {
+      clearInterval(intervalIds[pickerNum]);
+      const nameDisplay = document.getElementById(`nameDisplay${pickerNum}`);
+      const randomIndex = Math.floor(Math.random() * names.length);
+      const randomName = names[randomIndex];
+      nameDisplay.innerText = randomName;
+    }
+  </script>
+</body>
+</html>
